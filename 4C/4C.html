@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
+    <title>交互式测验页面</title>
+    <style>
+        /* 弹窗样式 */
+       .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+
+       .popup-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+       .answer-explanation {
+            display: none;
+            margin-top: 10px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+       .checkmark {
+            color: green;
+            margin-left: 10px;
+        }
+
+       .crossmark {
+            color: red;
+            margin-left: 10px;
+        }
+
+       .explanation-button {
+            display: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 font-sans">
+    <div class="container mx-auto p-8">
+        <h1 class="text-3xl font-bold mb-4">翻滚吧！烤肉架</h1>
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-2">教学视频</h2>
+            <video width="640" height="360" controls>
+               
+                
+            </video>
+        </div>
+        <div class="mb-8 grid grid-cols-2 md:grid-cols-3 gap-4">
+            <h2 class="text-xl font-bold mb-2 col-span-full">图片区域</h2>
+            
+        </div>
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-2">测验区域</h2>
+            <form id="quizForm">
+                <div class="mb-4">
+                    <p>1. 法国的首都是什么？<span id="q1-result"></span></p>
+                    <input type="radio" id="q1a1" name="q1" value="巴黎">
+                    <label for="q1a1">巴黎</label><br>
+                    <input type="radio" id="q1a2" name="q1" value="伦敦">
+                    <label for="q1a2">伦敦</label><br>
+                    <input type="radio" id="q1a3" name="q1" value="柏林">
+                    <label for="q1a3">柏林</label><br>
+                    <button type="button" onclick="toggleExplanation('q1-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q1-explanation-button">查看解析</button>
+                    <div class="answer-explanation" id="q1-explanation">
+                        答案是巴黎，巴黎是法国的政治、经济、文化和商业中心，有着悠久的历史和丰富的文化遗产。
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p>2. 哪个行星被称为红色行星？<span id="q2-result"></span></p>
+                    <input type="radio" id="q2a1" name="q2" value="金星">
+                    <label for="q2a1">金星</label><br>
+                    <input type="radio" id="q2a2" name="q2" value="火星">
+                    <label for="q2a2">火星</label><br>
+                    <input type="radio" id="q2a3" name="q2" value="木星">
+                    <label for="q2a3">木星</label><br>
+                    <button type="button" onclick="toggleExplanation('q2-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q2-explanation-button">查看解析</button>
+                    <div class="answer-explanation" id="q2-explanation">
+                        答案是火星，火星表面存在大量的氧化铁，使其呈现出红色外观，因此被称为红色行星。
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p>3. 最大的哺乳动物是什么？<span id="q3-result"></span></p>
+                    <input type="radio" id="q3a1" name="q3" value="大象">
+                    <label for="q3a1">大象</label><br>
+                    <input type="radio" id="q3a2" name="q3" value="蓝鲸">
+                    <label for="q3a2">蓝鲸</label><br>
+                    <input type="radio" id="q3a3" name="q3" value="长颈鹿">
+                    <label for="q3a3">长颈鹿</label><br>
+                    <button type="button" onclick="toggleExplanation('q3-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q3-explanation-button">查看解析</button>
+                    <div class="answer-explanation" id="q3-explanation">
+                        答案是蓝鲸，蓝鲸是地球上现存体型最大的动物，体长可达30米以上，体重可达200吨。
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p>4. 植物从大气中吸收哪种气体？<span id="q4-result"></span></p>
+                    <input type="radio" id="q4a1" name="q4" value="氧气">
+                    <label for="q4a1">氧气</label><br>
+                    <input type="radio" id="q4a2" name="q4" value="二氧化碳">
+                    <label for="q4a2">二氧化碳</label><br>
+                    <input type="radio" id="q4a3" name="q4" value="氮气">
+                    <label for="q4a3">氮气</label><br>
+                    <button type="button" onclick="toggleExplanation('q4-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q4-explanation-button">查看解析</button>
+                    <div class="answer-explanation" id="q4-explanation">
+                        答案是二氧化碳，植物通过光合作用将二氧化碳和水转化为有机物和氧气。
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <p>5. 金的化学符号是什么？<span id="q5-result"></span></p>
+                    <input type="radio" id="q5a1" name="q5" value="Au">
+                    <label for="q5a1">Au</label><br>
+                    <input type="radio" id="q5a2" name="q5" value="Ag">
+                    <label for="q5a2">Ag</label><br>
+                    <input type="radio" id="q5a3" name="q5" value="Fe">
+                    <label for="q5a3">Fe</label><br>
+                    <button type="button" onclick="toggleExplanation('q5-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q5-explanation-button">查看解析</button>
+                    <div class="answer-explanation" id="q5-explanation">
+                        答案是Au，Au是金的化学符号，来自于金的拉丁文名称“Aurum”。
+                    </div>
+                </div>
+                <button type="button" onclick="checkAnswers()"
+                    class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">提交答案</button>
+            </form>
+            <div id="result" class="mt-4"></div>
+        </div>
+    </div>
+    <!-- 弹窗 -->
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p id="popup-message"></p>
+        </div>
+    </div>
+    <script>
+        function checkAnswers() {
+            const answers = {
+                q1: '巴黎',
+                q2: '火星',
+                q3: '蓝鲸',
+                q4: '二氧化碳',
+                q5: 'Au'
+            };
+            let score = 0;
+            for (let question in answers) {
+                const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+                const resultSpan = document.getElementById(`${question}-result`);
+                const explanationButton = document.getElementById(`${question}-explanation-button`);
+                if (selectedOption && selectedOption.value === answers[question]) {
+                    score++;
+                    resultSpan.innerHTML = '<i class="fa-solid fa-check checkmark"></i>';
+                } else {
+                    resultSpan.innerHTML = '<i class="fa-solid fa-xmark crossmark"></i>';
+                }
+                explanationButton.style.display = 'inline-block';
+            }
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = `<p>您的得分是: ${score}/5</p>`;
+
+            const popup = document.getElementById('popup');
+            const popupMessage = document.getElementById('popup-message');
+            let message = '';
+            if (score > 3) {
+                message = `太棒了！👍 您答对了 ${score} 道题`;
+            } else if (score === 3) {
+                message = `再接再厉！🌺 您答对了 ${score} 道题`;
+            } else {
+                message = `还需努力！💪 您答对了 ${score} 道题`;
+            }
+            popupMessage.textContent = message;
+            popup.style.display = 'flex';
+            setTimeout(() => {
+                popup.style.display = 'none';
+            }, 3000);
+        }
+
+        function toggleExplanation(id) {
+            const explanation = document.getElementById(id);
+            if (explanation.style.display === 'none') {
+                explanation.style.display = 'block';
+            } else {
+                explanation.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+
+</html>
+    
