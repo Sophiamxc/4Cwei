@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" rel="stylesheet">
-    <title>交互式测验页面</title>
+    <title>翻滚吧！烤肉架</title>
     <style>
         /* 弹窗样式 */
        .popup {
@@ -75,85 +75,88 @@
 
 <body class="bg-gray-100 font-sans">
     <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-4">翻滚吧！烤肉架</h1>
+        <h1 class="text-3xl font-bold mb-4">视频、图片和测验页面</h1>
         <div class="mb-8">
-            <h2 class="text-xl font-bold mb-2">教学视频</h2>
+            <h2 class="text-xl font-bold mb-2">视频区域</h2>
             <video width="640" height="360" controls>
-               
                 
             </video>
         </div>
         <div class="mb-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-            <h2 class="text-xl font-bold mb-2 col-span-full">图片区域</h2>
+            <h2 class="text-xl font-bold mb-2 col-span-full">积木步骤图例</h2>
             <img src="1.jpg" alt="示例图片1" class="w-full rounded-md shadow-md">
-
+            <img src="2.jpg" alt="示例图片2" class="w-full rounded-md shadow-md">
+            <img src="3.jpg" alt="示例图片3" class="w-full rounded-md shadow-md">
+            <img src="4.jpg" alt="示例图片4" class="w-full rounded-md shadow-md">
+            <img src="5.jpg" alt="示例图片5" class="w-full rounded-md shadow-md">
+            <img src="6.jpg" alt="示例图片6" class="w-full rounded-md shadow-md">
         </div>
         <div class="mb-8">
-            <h2 class="text-xl font-bold mb-2">测验区域</h2>
+            <h2 class="text-xl font-bold mb-2">课后检测</h2>
             <form id="quizForm">
                 <div class="mb-4">
-                    <p>1. 法国的首都是什么？<span id="q1-result"></span></p>
-                    <input type="radio" id="q1a1" name="q1" value="巴黎">
-                    <label for="q1a1">巴黎</label><br>
-                    <input type="radio" id="q1a2" name="q1" value="伦敦">
-                    <label for="q1a2">伦敦</label><br>
-                    <input type="radio" id="q1a3" name="q1" value="柏林">
-                    <label for="q1a3">柏林</label><br>
+                    <p>1. 在搭建烤肉架时，安装侧框的摩擦销应该怎么安装？<span id="q1-result"></span></p>
+                    <input type="radio" id="q1a1" name="q1" value="朝内安装">
+                    <label for="q1a1">朝内安装</label><br>
+                    <input type="radio" id="q1a2" name="q1" value="朝外安装">
+                    <label for="q1a2">朝外安装</label><br>
+                    <input type="radio" id="q1a3" name="q1" value="随意安装">
+                    <label for="q1a3">随意安装</label><br>
                     <button type="button" onclick="toggleExplanation('q1-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q1-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q1-explanation">
-                        答案是巴黎，巴黎是法国的政治、经济、文化和商业中心，有着悠久的历史和丰富的文化遗产。
+                        答案是朝外安装。安装侧框时，摩擦销一定要朝外安装，否则烤肉架无法工作。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>2. 哪个行星被称为红色行星？<span id="q2-result"></span></p>
-                    <input type="radio" id="q2a1" name="q2" value="金星">
-                    <label for="q2a1">金星</label><br>
-                    <input type="radio" id="q2a2" name="q2" value="火星">
-                    <label for="q2a2">火星</label><br>
-                    <input type="radio" id="q2a3" name="q2" value="木星">
-                    <label for="q2a3">木星</label><br>
+                    <p>2. 三个相互咬合的齿轮，两边齿轮的转动方向（ ）。<span id="q2-result"></span></p>
+                    <input type="radio" id="q2a1" name="q2" value="相同">
+                    <label for="q2a1">相同</label><br>
+                    <input type="radio" id="q2a2" name="q2" value="相反">
+                    <label for="q2a2">相反</label><br>
+                    <input type="radio" id="q2a3" name="q2" value="不确定">
+                    <label for="q2a3">不确定</label><br>
                     <button type="button" onclick="toggleExplanation('q2-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q2-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q2-explanation">
-                        答案是火星，火星表面存在大量的氧化铁，使其呈现出红色外观，因此被称为红色行星。
+                        答案是相同。根据 “相邻齿轮转向相反” 的规律，三个咬合的齿轮两边的两个齿轮是同一个方向，中间的齿轮是相反的方向。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>3. 最大的哺乳动物是什么？<span id="q3-result"></span></p>
-                    <input type="radio" id="q3a1" name="q3" value="大象">
-                    <label for="q3a1">大象</label><br>
-                    <input type="radio" id="q3a2" name="q3" value="蓝鲸">
-                    <label for="q3a2">蓝鲸</label><br>
-                    <input type="radio" id="q3a3" name="q3" value="长颈鹿">
-                    <label for="q3a3">长颈鹿</label><br>
+                    <p>3. 当大齿轮带动小齿轮转动时，若大齿轮齿数为 30，小齿轮齿数为 10，小齿轮转速是大齿轮的（ ）。<span id="q3-result"></span></p>
+                    <input type="radio" id="q3a1" name="q3" value="3 倍">
+                    <label for="q3a1">3 倍</label><br>
+                    <input type="radio" id="q3a2" name="q3" value="1/3 倍">
+                    <label for="q3a2">1/3 倍</label><br>
+                    <input type="radio" id="q3a3" name="q3" value="1 倍">
+                    <label for="q3a3">1 倍</label><br>
                     <button type="button" onclick="toggleExplanation('q3-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q3-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q3-explanation">
-                        答案是蓝鲸，蓝鲸是地球上现存体型最大的动物，体长可达30米以上，体重可达200吨。
+                        答案是 3 倍。根据转速比 = 齿数反比，小齿轮齿数与大齿轮齿数比为 10:30 = 1:3，所以小齿轮转速是大齿轮的 3 倍。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>4. 植物从大气中吸收哪种气体？<span id="q4-result"></span></p>
-                    <input type="radio" id="q4a1" name="q4" value="氧气">
-                    <label for="q4a1">氧气</label><br>
-                    <input type="radio" id="q4a2" name="q4" value="二氧化碳">
-                    <label for="q4a2">二氧化碳</label><br>
-                    <input type="radio" id="q4a3" name="q4" value="氮气">
-                    <label for="q4a3">氮气</label><br>
+                    <p>4. 编程控制烤肉架时，要让烤肉架按照特定顺序执行动作，关键在于（ ）。<span id="q4-result"></span></p>
+                    <input type="radio" id="q4a1" name="q4" value="正确连接电机模块">
+                    <label for="q4a1">正确连接电机模块</label><br>
+                    <input type="radio" id="q4a2" name="q4" value="合理排列编程积木块顺序">
+                    <label for="q4a2">合理排列编程积木块顺序</label><br>
+                    <input type="radio" id="q4a3" name="q4" value="选择合适的电机功率">
+                    <label for="q4a3">选择合适的电机功率</label><br>
                     <button type="button" onclick="toggleExplanation('q4-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q4-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q4-explanation">
-                        答案是二氧化碳，植物通过光合作用将二氧化碳和水转化为有机物和氧气。
+                        答案是合理排列编程积木块顺序。编程是通过排列编程积木块顺序来控制烤肉架执行特定动作的。A 选项正确连接电机模块只是让烤肉架能运转，不能决定动作顺序；C 选项选择合适的电机功率影响的是烤肉架的动力，与动作顺序无关。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>5. 金的化学符号是什么？<span id="q5-result"></span></p>
-                    <input type="radio" id="q5a1" name="q5" value="Au">
-                    <label for="q5a1">Au</label><br>
-                    <input type="radio" id="q5a2" name="q5" value="Ag">
-                    <label for="q5a2">Ag</label><br>
-                    <input type="radio" id="q5a3" name="q5" value="Fe">
-                    <label for="q5a3">Fe</label><br>
+                    <p>5. 编程控制烤肉架实现完整动作并播放音乐，最后一步是（ ）。<span id="q5-result"></span></p>
+                    <input type="radio" id="q5a1" name="q5" value="连接电机模块与主控和电源，点击连接蓝牙，点击运行">
+                    <label for="q5a1">连接电机模块与主控和电源，点击连接蓝牙，点击运行</label><br>
+                    <input type="radio" id="q5a2" name="q5" value="编写让烤肉架翻滚和暂停的程序">
+                    <label for="q5a2">编写让烤肉架翻滚和暂停的程序</label><br>
+                    <input type="radio" id="q5a3" name="q5" value="添加播放音乐的编程积木块">
+                    <label for="q5a3">添加播放音乐的编程积木块</label><br>
                     <button type="button" onclick="toggleExplanation('q5-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q5-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q5-explanation">
-                        答案是Au，Au是金的化学符号，来自于金的拉丁文名称“Aurum”。
+                        答案是连接电机模块与主控和电源，点击连接蓝牙，点击运行。编程控制烤肉架，在完成编程步骤后，最后要将电机模块与主控和电源连接，点击连接蓝牙，连接完成后点击运行，烤肉架才会按指令运行。
                     </div>
                 </div>
                 <button type="button" onclick="checkAnswers()"
@@ -171,11 +174,11 @@
     <script>
         function checkAnswers() {
             const answers = {
-                q1: '巴黎',
-                q2: '火星',
-                q3: '蓝鲸',
-                q4: '二氧化碳',
-                q5: 'Au'
+                q1: '朝外安装',
+                q2: '相同',
+                q3: '3 倍',
+                q4: '合理排列编程积木块顺序',
+                q5: '连接电机模块与主控和电源，点击连接蓝牙，点击运行'
             };
             let score = 0;
             for (let question in answers) {
