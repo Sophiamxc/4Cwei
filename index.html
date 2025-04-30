@@ -9,7 +9,7 @@
     <title>翻滚吧！烤肉架</title>
     <style>
         /* 弹窗样式 */
-       .popup {
+        .popup {
             display: none;
             position: fixed;
             top: 0;
@@ -22,7 +22,7 @@
             animation: fadeIn 0.3s ease;
         }
 
-       .popup-content {
+        .popup-content {
             background-color: white;
             padding: 20px;
             border-radius: 10px;
@@ -48,7 +48,7 @@
             }
         }
 
-       .answer-explanation {
+        .answer-explanation {
             display: none;
             margin-top: 10px;
             padding: 10px;
@@ -57,106 +57,186 @@
             background-color: #f9f9f9;
         }
 
-       .checkmark {
+        .checkmark {
             color: green;
             margin-left: 10px;
         }
 
-       .crossmark {
+        .crossmark {
             color: red;
             margin-left: 10px;
         }
 
-       .explanation-button {
+        .explanation-button {
             display: none;
+        }
+
+        /* 图片容器样式 - 修改部分 */
+        .img-container {
+            position: relative;
+            cursor: pointer;
+            width: 100%;
+            height: 200px; /* 固定高度 */
+            overflow: hidden; /* 隐藏超出部分 */
+            border-radius: 5px;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* 图片样式 - 修改部分 */
+        .grid-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 填充容器，可能会裁剪图片 */
+            transition: transform 0.3s ease;
+        }
+
+        .img-container:hover .grid-img {
+            transform: scale(1.05);
+        }
+
+        /* 放大图片弹窗样式 */
+        .zoom-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .zoom-popup img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
         }
     </style>
 </head>
 
 <body class="bg-gray-100 font-sans">
     <div class="container mx-auto p-8">
-        <h1 class="text-3xl font-bold mb-4">视频、图片和测验页面</h1>
+        <h1 class="text-3xl font-bold mb-4">翻滚吧！烤肉架</h1>
         <div class="mb-8">
-            <h2 class="text-xl font-bold mb-2">视频区域</h2>
+            <h2 class="text-xl font-bold mb-2">教学视频</h2>
             <video width="640" height="360" controls>
-                
             </video>
         </div>
-        <div class="mb-8 grid grid-cols-2 md:grid-cols-3 gap-4">
-            <h2 class="text-xl font-bold mb-2 col-span-full">积木步骤图例</h2>
-            <img src="1.jpg" alt="示例图片1" class="w-full rounded-md shadow-md">
-            <img src="2.jpg" alt="示例图片2" class="w-full rounded-md shadow-md">
-            <img src="3.jpg" alt="示例图片3" class="w-full rounded-md shadow-md">
-            <img src="4.jpg" alt="示例图片4" class="w-full rounded-md shadow-md">
-            <img src="5.jpg" alt="示例图片5" class="w-full rounded-md shadow-md">
-            <img src="6.jpg" alt="示例图片6" class="w-full rounded-md shadow-md">
+        <div class="mb-8">
+            <h2 class="text-xl font-bold mb-2 col-span-full">积木搭建步骤图例</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="img-container" onclick="openZoomPopup('1.jpg')">
+                    <img src="1.jpg" alt="示例图片1" class="grid-img">
+                </div>
+                <div class="img-container" onclick="openZoomPopup('2.jpg')">
+                    <img src="2.jpg" alt="示例图片2" class="grid-img">
+                </div>
+                <div class="img-container" onclick="openZoomPopup('3.jpg')">
+                    <img src="3.jpg" alt="示例图片3" class="grid-img">
+                </div>
+                <div class="img-container" onclick="openZoomPopup('4.jpg')">
+                    <img src="4.jpg" alt="示例图片4" class="grid-img">
+                </div>
+                <div class="img-container" onclick="openZoomPopup('5.jpg')">
+                    <img src="5.jpg" alt="示例图片5" class="grid-img">
+                </div>
+                <div class="img-container" onclick="openZoomPopup('6.jpg')">
+                    <img src="6.jpg" alt="示例图片6" class="grid-img">
+                </div>
+            </div>
         </div>
         <div class="mb-8">
             <h2 class="text-xl font-bold mb-2">课后检测</h2>
             <form id="quizForm">
                 <div class="mb-4">
-                    <p>1. 在搭建烤肉架时，安装侧框的摩擦销应该怎么安装？<span id="q1-result"></span></p>
+                    <p>1. 在搭建烤肉架时，安装侧框的摩擦销应该怎么安装（ ）。<span id="q1-result"></span></p>
                     <input type="radio" id="q1a1" name="q1" value="朝内安装">
-                    <label for="q1a1">朝内安装</label><br>
+                    <label for="q1a1">A.朝内安装</label><br>
                     <input type="radio" id="q1a2" name="q1" value="朝外安装">
-                    <label for="q1a2">朝外安装</label><br>
+                    <label for="q1a2">B.朝外安装</label><br>
                     <input type="radio" id="q1a3" name="q1" value="随意安装">
-                    <label for="q1a3">随意安装</label><br>
-                    <button type="button" onclick="toggleExplanation('q1-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q1-explanation-button">查看解析</button>
+                    <label for="q1a3">C.随意安装</label><br>
+                    <button type="button" onclick="toggleExplanation('q1-explanation')"
+                        class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button"
+                        id="q1-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q1-explanation">
-                        答案是朝外安装。安装侧框时，摩擦销一定要朝外安装，否则烤肉架无法工作。
+                        答案: B.朝外安装。安装侧框时，摩擦销一定要朝外安装，否则烤肉架无法工作。
                     </div>
                 </div>
                 <div class="mb-4">
                     <p>2. 三个相互咬合的齿轮，两边齿轮的转动方向（ ）。<span id="q2-result"></span></p>
                     <input type="radio" id="q2a1" name="q2" value="相同">
-                    <label for="q2a1">相同</label><br>
+                    <label for="q2a1">A.相同</label><br>
                     <input type="radio" id="q2a2" name="q2" value="相反">
-                    <label for="q2a2">相反</label><br>
+                    <label for="q2a2">B.相反</label><br>
                     <input type="radio" id="q2a3" name="q2" value="不确定">
-                    <label for="q2a3">不确定</label><br>
-                    <button type="button" onclick="toggleExplanation('q2-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q2-explanation-button">查看解析</button>
+                    <label for="q2a3">C.不确定</label><br>
+                    <button type="button" onclick="toggleExplanation('q2-explanation')"
+                        class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button"
+                        id="q2-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q2-explanation">
-                        答案是相同。根据 “相邻齿轮转向相反” 的规律，三个咬合的齿轮两边的两个齿轮是同一个方向，中间的齿轮是相反的方向。
+                        答案: A.相同。根据 "相邻齿轮转向相反" 的规律，三个咬合的齿轮两边的两个齿轮是同一个方向，中间的齿轮是相反的方向。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>3. 当大齿轮带动小齿轮转动时，若大齿轮齿数为 30，小齿轮齿数为 10，小齿轮转速是大齿轮的（ ）。<span id="q3-result"></span></p>
+                    <p>3. 当大齿轮带动小齿轮转动时，若大齿轮齿数为 30，小齿轮齿数为 10，小齿轮转速是大齿轮的（ ）。<span
+                            id="q3-result"></span></p>
                     <input type="radio" id="q3a1" name="q3" value="3 倍">
-                    <label for="q3a1">3 倍</label><br>
+                    <label for="q3a1">A.3 倍</label><br>
                     <input type="radio" id="q3a2" name="q3" value="1/3 倍">
-                    <label for="q3a2">1/3 倍</label><br>
+                    <label for="q3a2">B.1/3 倍</label><br>
                     <input type="radio" id="q3a3" name="q3" value="1 倍">
-                    <label for="q3a3">1 倍</label><br>
-                    <button type="button" onclick="toggleExplanation('q3-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q3-explanation-button">查看解析</button>
+                    <label for="q3a3">C.1 倍</label><br>
+                    <button type="button" onclick="toggleExplanation('q3-explanation')"
+                        class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button"
+                        id="q3-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q3-explanation">
-                        答案是 3 倍。根据转速比 = 齿数反比，小齿轮齿数与大齿轮齿数比为 10:30 = 1:3，所以小齿轮转速是大齿轮的 3 倍。
+                        答案: A.3 倍。根据转速比 = 齿数反比，小齿轮齿数与大齿轮齿数比为 10:30 = 1:3，所以小齿轮转速是大齿轮的 3 倍。
                     </div>
                 </div>
                 <div class="mb-4">
-                    <p>4. 编程控制烤肉架时，要让烤肉架按照特定顺序执行动作，关键在于（ ）。<span id="q4-result"></span></p>
+                    <p>4. 编程控制烤肉架时，要让烤肉架按照特定顺序执行动作，关键在于（ ）。<span
+                            id="q4-result"></span></p>
                     <input type="radio" id="q4a1" name="q4" value="正确连接电机模块">
-                    <label for="q4a1">正确连接电机模块</label><br>
+                    <label for="q4a1">A.正确连接电机模块</label><br>
                     <input type="radio" id="q4a2" name="q4" value="合理排列编程积木块顺序">
-                    <label for="q4a2">合理排列编程积木块顺序</label><br>
+                    <label for="q4a2">B.合理排列编程积木块顺序</label><br>
                     <input type="radio" id="q4a3" name="q4" value="选择合适的电机功率">
-                    <label for="q4a3">选择合适的电机功率</label><br>
-                    <button type="button" onclick="toggleExplanation('q4-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q4-explanation-button">查看解析</button>
+                    <label for="q4a3">C.选择合适的电机功率</label><br>
+                    <button type="button" onclick="toggleExplanation('q4-explanation')"
+                        class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button"
+                        id="q4-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q4-explanation">
-                        答案是合理排列编程积木块顺序。编程是通过排列编程积木块顺序来控制烤肉架执行特定动作的。A 选项正确连接电机模块只是让烤肉架能运转，不能决定动作顺序；C 选项选择合适的电机功率影响的是烤肉架的动力，与动作顺序无关。
+                        答案: B.合理排列编程积木块顺序。编程是通过排列编程积木块顺序来控制烤肉架执行特定动作的。A选项正确连接电机模块只是让烤肉架能运转，不能决定动作顺序；C选项选择合适的电机功率影响的是烤肉架的动力，与动作顺序无关。
                     </div>
                 </div>
                 <div class="mb-4">
                     <p>5. 编程控制烤肉架实现完整动作并播放音乐，最后一步是（ ）。<span id="q5-result"></span></p>
                     <input type="radio" id="q5a1" name="q5" value="连接电机模块与主控和电源，点击连接蓝牙，点击运行">
-                    <label for="q5a1">连接电机模块与主控和电源，点击连接蓝牙，点击运行</label><br>
+                    <label for="q5a1">A.连接电机模块与主控和电源，点击连接蓝牙，点击运行</label><br>
                     <input type="radio" id="q5a2" name="q5" value="编写让烤肉架翻滚和暂停的程序">
-                    <label for="q5a2">编写让烤肉架翻滚和暂停的程序</label><br>
+                    <label for="q5a2">B.编写让烤肉架翻滚和暂停的程序</label><br>
                     <input type="radio" id="q5a3" name="q5" value="添加播放音乐的编程积木块">
-                    <label for="q5a3">添加播放音乐的编程积木块</label><br>
-                    <button type="button" onclick="toggleExplanation('q5-explanation')" class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button" id="q5-explanation-button">查看解析</button>
+                    <label for="q5a3">C.添加播放音乐的编程积木块</label><br>
+                    <button type="button" onclick="toggleExplanation('q5-explanation')"
+                        class="mt-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-1 px-2 rounded explanation-button"
+                        id="q5-explanation-button">查看解析</button>
                     <div class="answer-explanation" id="q5-explanation">
-                        答案是连接电机模块与主控和电源，点击连接蓝牙，点击运行。编程控制烤肉架，在完成编程步骤后，最后要将电机模块与主控和电源连接，点击连接蓝牙，连接完成后点击运行，烤肉架才会按指令运行。
+                        答案: A.连接电机模块与主控和电源，点击连接蓝牙，点击运行。编程控制烤肉架，在完成编程步骤后，最后要将电机模块与主控和电源连接，点击连接蓝牙，连接完成后点击运行，烤肉架才会按指令运行。
                     </div>
                 </div>
                 <button type="button" onclick="checkAnswers()"
@@ -170,6 +250,11 @@
         <div class="popup-content">
             <p id="popup-message"></p>
         </div>
+    </div>
+    <!-- 放大图片弹窗 -->
+    <div class="zoom-popup" id="zoomPopup">
+        <span class="close-btn" onclick="closeZoomPopup()">&times;</span>
+        <img id="zoomImg" src="" alt="放大图片">
     </div>
     <script>
         function checkAnswers() {
@@ -221,8 +306,19 @@
                 explanation.style.display = 'none';
             }
         }
+
+        function openZoomPopup(imgSrc) {
+            const zoomPopup = document.getElementById('zoomPopup');
+            const zoomImg = document.getElementById('zoomImg');
+            zoomImg.src = imgSrc;
+            zoomPopup.style.display = 'flex';
+        }
+
+        function closeZoomPopup() {
+            const zoomPopup = document.getElementById('zoomPopup');
+            zoomPopup.style.display = 'none';
+        }
     </script>
 </body>
 
 </html>
-    
